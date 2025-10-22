@@ -34,7 +34,7 @@
   --large-h3-font-size: 3.5rem;
 }
 
-@media (width < 620px) {
+@media (width < 700px) {
   p, a, ul, button {
     font-size: var(--small-text-font-size);
   }
@@ -52,7 +52,7 @@
   }
 }
 
-@media (620px <= width <= 1200px) {
+@media (700px <= width <= 1200px) {
   p, a, ul, button {
     font-size: var(--medium-text-font-size);
   }
@@ -88,8 +88,7 @@
   }
 }
 
-/* CE TOP
-html:has(.change-theme:hover) * {
+/* html:has(.change-theme:hover) * {
   --color-one: var(--dark-one);
   --color-two: var(--dark-two);
   --color-three: var(--dark-three);
