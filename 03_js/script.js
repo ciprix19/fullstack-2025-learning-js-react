@@ -29,6 +29,8 @@ let theme = 'light'; // theme on startup
 const button = document.querySelector('.change-theme-button');
 button.addEventListener('click', handleTheme);
 
+// handle hamburger menu
+
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -36,6 +38,25 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
 });
+
+// fetch data from URL
+// async function fetchData(url) {
+//     let response = await fetch(url);
+
+//     let reviews = await response.json();
+
+//     for (let el of reviews) {
+//         console.log(el);
+//     }
+// }
+
+fetch('./database/reviews.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Testimonials:', data);
+  })
+  .catch(error => console.error('Error fetching data:', error));
+
 
 // i guess these are inline styles?
 // let burgerMenuStatus = 'closed';
@@ -85,5 +106,3 @@ hamburger.addEventListener('click', () => {
 
 // handleResize(); // call this so that the burger menu loads, in case the window is smaller that 700px at startup
 // window.onresize = handleResize;
-
-// now using classes
