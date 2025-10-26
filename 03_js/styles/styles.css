@@ -429,6 +429,10 @@ h4 {
   font-size: 2rem;
 }
 
+a {
+  color: var(--color-four);
+}
+
 section {
   margin-block: 5rem;
 }
@@ -442,6 +446,25 @@ img {
   display: block;
   border: var(--color-three) 5px, solid;
   border-radius: 10%;
+}
+
+.two-column-layout-bigger {
+  display: grid;
+  gap: 60px;
+  @media (width > 700px) {
+      grid-template-columns: 1fr 3fr;
+  }
+  place-items: center; /* cool */
+}
+
+.button-fact {
+  padding: 3rem;
+}
+
+.button-fact:hover {
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
 /* rotate on all axis: X (left to right) -> Y (top to bottom) -> Z (rotate image) */

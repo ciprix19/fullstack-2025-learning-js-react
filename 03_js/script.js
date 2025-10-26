@@ -41,9 +41,16 @@ hamburger.addEventListener('click', () => {
 
 // fetch data from URL
 async function fetchData(url) {
-    let response = await fetch(url);
-    let data = await response.json();
-    return data;
+    try {
+        let response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        let data = await response.json();
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 // returns the elements required for displaying the review (h4, p, h2, img)
@@ -116,6 +123,62 @@ async function displayReviews(url) {
 }
 
 displayReviews('https://raw.githubusercontent.com/ciprix19/fullstack-2025-learning-js-react/refs/heads/features/TASK-04_js_project/03_js/database/reviews.json');
+
+// create a fact as an object and return it
+function createFact(fact) {
+    const factText = document.createElement('h2');
+    const factSource = document.createElement('p');
+    const factSourceUrl = document.createElement('a');
+
+    factText.textContent = fact.text;
+    factSource.textContent = fact.source;
+    factSourceUrl.textContent = fact.source_url;
+    factSourceUrl.setAttribute('href', fact.source_url);
+    factSourceUrl.setAttribute('target', '_blank');
+
+    return {factText, factSource, factSourceUrl};
+}
+
+function createFactLayout(fact) {
+    const newDiv = document.createElement('div');
+    newDiv.appendChild(fact.factText);
+    newDiv.appendChild(fact.factSource);
+    newDiv.appendChild(fact.factSourceUrl);
+    newDiv.classList.add('card');
+    return newDiv;
+}
+
+function createErrorLayout() {
+    const div = document.createElement('div');
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Uh-Oh!!! error!!!';
+    div.appendChild(h2);
+    return div;
+}
+
+// useless fact at the bottom of the page
+async function displayUselessFact(url) {
+    data = await fetchData(url);
+    const divFact = document.querySelector('.fact');
+    divFact.removeChild(divFact.firstChild);
+    if (data != undefined && data != null) {
+        let fact = createFact(data);
+        let newDiv = createFactLayout(fact);
+        divFact.appendChild(newDiv);
+    } else {
+        const newDiv = createErrorLayout();
+        divFact.appendChild(newDiv);
+    }
+}
+
+displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/random');
+// displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/randomAAAA');
+
+const buttonFact = document.querySelector('.button-fact');
+// i can pass variables inside functions using lambda
+buttonFact.addEventListener('click', () => displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/random'));
+
+
 
 // i guess these are inline styles?
 // let burgerMenuStatus = 'closed';
