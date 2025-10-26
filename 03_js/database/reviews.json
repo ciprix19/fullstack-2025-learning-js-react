@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Jane Doe",
       "role": "Marketing Manager at BrightCo",
-      "photo": "jane_doe.jpg",
+      "photo": "profile-pic.jpg",
       "feedback": "This product completely transformed our workflow! The product is outstanding.",
       "rating": 5
     },
@@ -12,7 +12,7 @@
       "id": 2,
       "name": "Michael Lee",
       "role": "Freelance Designer",
-      "photo": "michael_lee.png",
+      "photo": "profile-pic.png",
       "feedback": "Simple, clean, and efficient. Exactly what I needed to manage my documentations.",
       "rating": 4.5
     },
@@ -20,7 +20,7 @@
       "id": 3,
       "name": "Sara Ahmed",
       "role": "Startup Founder",
-      "photo": "sara_ahmed.jpg",
+      "photo": "profile-pic.jpg",
       "feedback": "A reliable solution that saves us time every single day.",
       "rating": 4.8
     }

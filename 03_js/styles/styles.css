@@ -116,6 +116,12 @@ header {
   .logo-div {
     margin-inline-start: 0;
   }
+  .text-area {
+    font-size: var(--small-text-font-size);
+  }
+  .input-rating {
+    font-size: var(--small-text-font-size);
+  }
   /* burgir */
   .hamburger {
     display: block;
@@ -165,6 +171,12 @@ header {
   .logo-div {
     margin-inline-start: 1rem;
   }
+  .text-area {
+    font-size: var(--medium-text-font-size);
+  }
+  .input-rating {
+    font-size: var(--medium-text-font-size);
+  }
 }
 
 @media (width > 1200px) {
@@ -182,6 +194,12 @@ header {
   }
   .logo-div {
     margin-inline-start: 1rem;
+  }
+  .text-area {
+    font-size: var(--large-text-font-size);
+  }
+  .input-rating {
+    font-size: var(--large-text-font-size);
   }
 }
 
@@ -219,6 +237,7 @@ button {
   border: solid var(--color-four) 5px;
   border-radius: 100px;
   cursor: pointer;
+  padding: 0 1rem;
 }
 
 .two-column-layout {
@@ -230,12 +249,25 @@ button {
   place-items: center; /* cool */
 }
 
+.three-column-layout {
+  display: grid;
+  gap: 60px;
+  @media (width > 700px) {
+      grid-template-columns: 1fr 1fr 1fr;
+  }
+  place-items: center; /* cool */
+}
+
 main {
   margin: 3rem;
 }
 
 footer {
   text-align: center;
+}
+
+.feedback-card {
+  margin-block: 1rem;
 }
 
 .card {
@@ -250,6 +282,27 @@ footer {
   animation-name: shake-circle;
   animation-duration: 0.3s;
   animation-iteration-count: infinite;
+}
+
+.rating-div {
+  display: flex;
+  justify-content: right;
+  padding: 1rem;
+}
+
+.text-area {
+  inline-size: 100%;
+  block-size: 10rem;
+  background-color: var(--color-three);
+  color: var(--color-four);
+}
+
+.input-rating {
+  background-color: var(--color-three);
+  color: var(--color-four);
+  inline-size: 80px;
+  text-align: center;
+  border-radius: 20px;
 }
 
 @keyframes shake-circle {
@@ -332,6 +385,10 @@ footer {
   padding: 0.3rem;
 }
 
+.review-image {
+  margin-inline-end: 2rem;
+}
+
 .logo-img {
   margin-inline-end: 1rem;
   border-radius: 50%;
@@ -368,8 +425,12 @@ h1 span {
   text-shadow: 5px 0px 10px var(--color-one);
 }
 
+h4 {
+  font-size: 2rem;
+}
+
 section {
-    margin-block: 5rem;
+  margin-block: 5rem;
 }
 
 .emoji-list li::marker {

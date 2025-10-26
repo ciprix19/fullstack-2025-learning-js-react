@@ -40,23 +40,64 @@ hamburger.addEventListener('click', () => {
 });
 
 // fetch data from URL
-// async function fetchData(url) {
-//     let response = await fetch(url);
+async function fetchData(url) {
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
+}
 
-//     let reviews = await response.json();
+// returns the elements required for displaying the review (h4, p, h2, img)
+function createReviewFromCustomer(customer) {
+    const customerNameAndRole = document.createElement('h4');
+    const customerFeedback = document.createElement('p');
+    const customerRating = document.createElement('h3');
+    const customerPhoto = document.createElement('img');
 
-//     for (let el of reviews) {
-//         console.log(el);
-//     }
-// }
+    customerNameAndRole.textContent = customer.name + ', ' + customer.role;
+    customerFeedback.textContent = `"${customer.feedback}"`;
+    customerRating.textContent = customer.rating + '⭐';
+    customerPhoto.setAttribute('src', './images/' + customer.photo);
 
-fetch('./database/reviews.json')
-  .then(response => response.json())
-  .then(data => {
-    console.log('Testimonials:', data);
-  })
-  .catch(error => console.error('Error fetching data:', error));
+    return {customerNameAndRole, customerFeedback, customerRating, customerPhoto};
+}
 
+// returns a div element created from a review
+function createReviewLayout(review) {
+    const newDiv = document.createElement('div');
+
+    // create 3 divs for cool layout
+    const leftDiv = document.createElement('div');
+    leftDiv.appendChild(review.customerPhoto);
+
+    const centerDiv = document.createElement('div');
+    centerDiv.appendChild(review.customerNameAndRole);
+    centerDiv.appendChild(review.customerFeedback);
+
+    const rightDiv = document.createElement('div');
+    rightDiv.appendChild(review.customerRating);
+
+    newDiv.appendChild(leftDiv);
+    newDiv.appendChild(centerDiv);
+    newDiv.appendChild(rightDiv);
+    newDiv.classList.add('card');
+    newDiv.classList.add('feedback-card');
+    newDiv.classList.add('three-column-layout');
+
+    return newDiv;
+}
+
+async function displayReviews(url) {
+    data = await fetchData(url); // :P
+    // reviews is the object that holds the Arrays with the review data
+    reviewsDiv = document.querySelector('.reviews');
+    data.reviews.forEach(customer => {
+        let reviewFromCustomer = createReviewFromCustomer(customer);
+        let newDiv = createReviewLayout(reviewFromCustomer);
+        reviewsDiv.appendChild(newDiv);
+    });
+}
+
+displayReviews('https://raw.githubusercontent.com/ciprix19/fullstack-2025-learning-js-react/refs/heads/features/TASK-04_js_project/03_js/database/reviews.json');
 
 // i guess these are inline styles?
 // let burgerMenuStatus = 'closed';
