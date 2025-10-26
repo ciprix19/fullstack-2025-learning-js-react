@@ -243,7 +243,7 @@ button {
 .two-column-layout {
   display: grid;
   gap: 60px;
-  @media (width > 620px) {
+  @media (width > 700px) {
       grid-template-columns: 1fr 1fr;
   }
   place-items: center; /* cool */

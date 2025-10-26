@@ -58,10 +58,17 @@ function createReviewFromCustomer(customer) {
     customerRating.textContent = customer.rating + '⭐';
     customerPhoto.setAttribute('src', './images/' + customer.photo);
 
+    // use the color red to highlight those whose length is even
+    if (customer.role.length % 2 == 0) {
+        customerNameAndRole.classList.add('card');
+    }
+
     return {customerNameAndRole, customerFeedback, customerRating, customerPhoto};
 }
 
 // returns a div element created from a review
+
+// read data from the JSON file (like you would read from a database) and display this data
 function createReviewLayout(review) {
     const newDiv = document.createElement('div');
 
@@ -86,10 +93,21 @@ function createReviewLayout(review) {
     return newDiv;
 }
 
+// sort by role length
+function sortingFunction(a, b) {
+    return b.role.length - a.role.length;
+}
+
+// sorted by role
 async function displayReviews(url) {
     data = await fetchData(url); // :P
     // reviews is the object that holds the Arrays with the review data
     reviewsDiv = document.querySelector('.reviews');
+    // console.log(data.reviews);
+    data.reviews.sort(sortingFunction);
+    // for (let i = 0; i < data.reviews.length; i++) {
+    //     console.log(data.reviews[i]);
+    // }
     data.reviews.forEach(customer => {
         let reviewFromCustomer = createReviewFromCustomer(customer);
         let newDiv = createReviewLayout(reviewFromCustomer);
