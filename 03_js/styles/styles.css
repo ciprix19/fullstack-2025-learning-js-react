@@ -177,6 +177,8 @@ header {
   .input-rating {
     font-size: var(--medium-text-font-size);
   }
+  .feedback-card {
+  }
 }
 
 @media (width > 1200px) {
@@ -252,10 +254,12 @@ button {
 .three-column-layout {
   display: grid;
   gap: 60px;
+  /* justify-items: start; */
+  place-items: center;
   @media (width > 700px) {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 3fr 1fr;
+      justify-items: start;
   }
-  place-items: center; /* cool */
 }
 
 main {
@@ -266,9 +270,7 @@ footer {
   text-align: center;
 }
 
-.feedback-card {
-  margin-block: 1rem;
-}
+
 
 .card {
   background: var(--color-two);
@@ -276,6 +278,10 @@ footer {
   border: var(--color-one) 10px solid;
   padding: 1rem;
   color: var(--color-four);
+}
+
+.feedback-card {
+  margin-block: 1rem;
 }
 
 .right-shadow:hover {
@@ -303,6 +309,11 @@ footer {
   inline-size: 80px;
   text-align: center;
   border-radius: 20px;
+  margin: auto 1rem;
+}
+
+.highlight-even {
+  background: linear-gradient(var(--color-three), var(--color-one));
 }
 
 @keyframes shake-circle {
@@ -477,6 +488,16 @@ img {
   animation-name: crazy_spin;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+}
+
+.pagination {
+  display: flex;
+  justify-content: end;
+}
+
+button.arrow {
+  margin: 0 1rem;
+  padding-block-end: 0.5rem;
 }
 
 @keyframes crazy_spin {

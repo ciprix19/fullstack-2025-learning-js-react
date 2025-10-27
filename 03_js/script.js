@@ -46,7 +46,7 @@ async function fetchData(url) {
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        let data = await response.json();
+        data = await response.json();
         return data;
     } catch (e) {
         console.log(e);
@@ -60,14 +60,14 @@ function createReviewFromCustomer(customer) {
     const customerRating = document.createElement('h3');
     const customerPhoto = document.createElement('img');
 
-    customerNameAndRole.textContent = customer.name + ', ' + customer.role;
+    customerNameAndRole.textContent = customer.id + ', ' +  customer.name + ', ' + customer.role;
     customerFeedback.textContent = `"${customer.feedback}"`;
     customerRating.textContent = customer.rating + '⭐';
     customerPhoto.setAttribute('src', './images/' + customer.photo);
 
     // use the color red to highlight those whose length is even
     if (customer.role.length % 2 == 0) {
-        customerNameAndRole.classList.add('card');
+        customerNameAndRole.classList.add('highlight-even');
     }
 
     return {customerNameAndRole, customerFeedback, customerRating, customerPhoto};
@@ -106,23 +106,61 @@ function sortingFunction(a, b) {
 }
 
 // sorted by role
-async function displayReviews(url) {
-    data = await fetchData(url); // :P
+async function displayReviews(url, position, nOfReviews) {
+    console.log(position);
+    if (allReviews == null) {
+        allReviews = await fetchData(url); // :P
+        // allReviews.reviews.sort(sortingFunction);
+        allReviews.reviews.pop();
+        console.log(allReviews.reviews);
+    }
     // reviews is the object that holds the Arrays with the review data
     reviewsDiv = document.querySelector('.reviews');
-    // console.log(data.reviews);
-    data.reviews.sort(sortingFunction);
-    // for (let i = 0; i < data.reviews.length; i++) {
-    //     console.log(data.reviews[i]);
-    // }
-    data.reviews.forEach(customer => {
-        let reviewFromCustomer = createReviewFromCustomer(customer);
+    while (reviewsDiv.hasChildNodes()) {
+        reviewsDiv.removeChild(reviewsDiv.firstChild);
+    }
+    for (let i = position; i < position + nOfReviews; i++) {
+        if (i == allReviews.reviews.length) {
+            break;
+        }
+        let reviewFromCustomer = createReviewFromCustomer(allReviews.reviews[i]);
         let newDiv = createReviewLayout(reviewFromCustomer);
         reviewsDiv.appendChild(newDiv);
-    });
+    }
 }
 
-displayReviews('https://raw.githubusercontent.com/ciprix19/fullstack-2025-learning-js-react/refs/heads/features/TASK-04_js_project/03_js/database/reviews.json');
+let allReviews = null;
+let reviewPosition = 0;
+let nOfReviews = 3; // how many reviews per page
+url = 'https://raw.githubusercontent.com/ciprix19/fullstack-2025-learning-js-react/refs/heads/features/TASK-04_js_project/03_js/database/reviews.json';
+displayReviews(url, 0, nOfReviews);
+const buttonReviewLeft = document.querySelector('#left-arrow')
+console.log(buttonReviewLeft);
+buttonReviewLeft.addEventListener('click', () => {
+    reviewPosition -= nOfReviews;
+    // merry go rouuund
+    // if allReviews.reviews.length is not divisible by nOfReviews, display % nOfReviews elements
+    // tested by poping elements from the allReviews array
+    if (reviewPosition < 0) {
+        if (allReviews.reviews.length % nOfReviews === 0) {
+            reviewPosition = allReviews.reviews.length - nOfReviews;
+        } else {
+            reviewPosition = allReviews.reviews.length - (allReviews.reviews.length % nOfReviews);
+        }
+    }
+    displayReviews(url, reviewPosition, nOfReviews);
+});
+
+const buttonReviewRight = document.querySelector('#right-arrow')
+console.log(buttonReviewRight);
+buttonReviewRight.addEventListener('click', () => {
+    reviewPosition += nOfReviews;
+    // merry go rouuund
+    if (reviewPosition >= allReviews.reviews.length) {
+        reviewPosition = 0;
+    }
+    displayReviews(url, reviewPosition, nOfReviews);
+});
 
 // create a fact as an object and return it
 function createFact(fact) {
@@ -160,7 +198,11 @@ function createErrorLayout() {
 async function displayUselessFact(url) {
     data = await fetchData(url);
     const divFact = document.querySelector('.fact');
-    divFact.removeChild(divFact.firstChild);
+    // remove the fact
+    if (divFact.hasChildNodes()) {
+        divFact.removeChild(divFact.firstChild);
+    }
+    // and add a new one if it exists
     if (data != undefined && data != null) {
         let fact = createFact(data);
         let newDiv = createFactLayout(fact);
@@ -177,8 +219,6 @@ displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/random');
 const buttonFact = document.querySelector('.button-fact');
 // i can pass variables inside functions using lambda
 buttonFact.addEventListener('click', () => displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/random'));
-
-
 
 // i guess these are inline styles?
 // let burgerMenuStatus = 'closed';
