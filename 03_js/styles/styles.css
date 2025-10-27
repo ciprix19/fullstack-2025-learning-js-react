@@ -177,8 +177,6 @@ header {
   .input-rating {
     font-size: var(--medium-text-font-size);
   }
-  .feedback-card {
-  }
 }
 
 @media (width > 1200px) {

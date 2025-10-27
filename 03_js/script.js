@@ -60,7 +60,9 @@ function createReviewFromCustomer(customer) {
     const customerRating = document.createElement('h3');
     const customerPhoto = document.createElement('img');
 
-    customerNameAndRole.textContent = customer.id + ', ' +  customer.name + ', ' + customer.role;
+    // id in front for testing buttonReviewLeft and buttonReviewRight
+    // customerNameAndRole.textContent = customer.id + ', ' +  customer.name + ', ' + customer.role;
+    customerNameAndRole.textContent = customer.name + ', ' + customer.role;
     customerFeedback.textContent = `"${customer.feedback}"`;
     customerRating.textContent = customer.rating + '⭐';
     customerPhoto.setAttribute('src', './images/' + customer.photo);
@@ -110,7 +112,7 @@ async function displayReviews(url, position, nOfReviews) {
     console.log(position);
     if (allReviews == null) {
         allReviews = await fetchData(url); // :P
-        // allReviews.reviews.sort(sortingFunction);
+        allReviews.reviews.sort(sortingFunction);
         allReviews.reviews.pop();
         console.log(allReviews.reviews);
     }
@@ -189,7 +191,7 @@ function createFactLayout(fact) {
 function createErrorLayout() {
     const div = document.createElement('div');
     const h2 = document.createElement('h2');
-    h2.textContent = 'Uh-Oh!!! error!!!';
+    h2.textContent = 'Uh-Oh!!... Try generating a random fact!';
     div.appendChild(h2);
     return div;
 }
@@ -213,8 +215,9 @@ async function displayUselessFact(url) {
     }
 }
 
-displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/random');
-// displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/randomAAAA');
+// displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/random');
+
+displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/randomAAAA');
 
 const buttonFact = document.querySelector('.button-fact');
 // i can pass variables inside functions using lambda
