@@ -77,27 +77,21 @@ h1 {
   text-align: center;
   line-height: 1;
 }
-
 h1 span {
   text-shadow: 5px 0px 10px var(--color-one);
 }
-
 h4 {
   font-size: 2rem;
 }
-
 a {
   color: var(--color-four);
 }
-
 section {
   margin-block: 5rem;
 }
-
 .emoji-list li::marker {
   content: '🗿';
 }
-
 img {
   max-inline-size: 100%;
   display: block;

@@ -9,6 +9,7 @@ export default function Landing() {
         <>
             <h1>DISCOVER <span className='dark-text'>DOCUFLOW</span></h1>
             <section>
+                <h3>Document Your Tools, Clearly and Effortlessly</h3>
                 <p>DocuFlow is built for developers, product teams, and creators who need a simple way to write, organize, and share documentation about their tools.</p>
                 <figure>
                     <img src={processDocumentationToolsImage} alt='logo'></img>
