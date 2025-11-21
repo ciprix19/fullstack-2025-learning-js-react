@@ -107,7 +107,6 @@ function sortingFunction(a, b) {
     return b.role.length - a.role.length;
 }
 
-// sorted by role
 async function displayReviews(url, position, nOfReviews) {
     console.log(position);
     if (allReviews == null) {
