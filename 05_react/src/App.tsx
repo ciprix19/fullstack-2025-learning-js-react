@@ -3,7 +3,7 @@ import './App.css'
 import Footer from './footer/footer'
 import Header from './header/header'
 import Landing from './layout/landing/landing'
-import type { ThemeState } from './enum/ThemeState'
+import type { ThemeState } from './interfaces/theme-state'
 
 function App() {
     const [theme, setTheme] = useState<ThemeState>({status: 'red'});

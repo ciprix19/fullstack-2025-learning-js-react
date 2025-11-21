@@ -1,11 +1,11 @@
 import './styles/header.css'
 import logoImg from '../assets/images/logo_new.png'
-import type { ThemeState } from '../enum/ThemeState';
+import type { ThemeState } from '../interfaces/theme-state';
 import { useState } from 'react';
 
 interface HeaderProps {
     theme: ThemeState;
-    setTheme: Function;
+    setTheme: (theme: ThemeState) => void;
 }
 
 export default function Header({ theme, setTheme }: HeaderProps ) {

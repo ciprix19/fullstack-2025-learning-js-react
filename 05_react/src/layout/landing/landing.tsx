@@ -1,7 +1,7 @@
 import './styles/landing.css'
 import processDocumentationToolsImage from '../../assets/images/process-documentation-tools-1.jpg'
 import landingImage from '../../assets/images/landing.jpg'
-import Testimonials from './testiomials';
+import Testimonials from './testimonials';
 import GenerateRandomFact from './generate-random-fact';
 
 export default function Landing() {
