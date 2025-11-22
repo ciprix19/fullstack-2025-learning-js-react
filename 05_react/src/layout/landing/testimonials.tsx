@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
+import { useFetchData } from '../../utils/useFetchData';
 
 type Review = {
     id: number;
@@ -11,52 +12,88 @@ type Review = {
 
 type Reviews = Review[];
 
+let howManyReviews = 3;
 export default function Testimonials() {
+    const fetched = useFetchData('/database/reviews.json');
     const [reviews, setReviews] = useState<Reviews>([]);
+    const [currentReviewIndex, setCurrentReviewIndex] = useState<number>(0);
 
     useEffect(() => {
-        let ignore = false;
-        async function startFetching() {
-            const res = await fetch('/database/reviews.json');
-            if (!ignore) {
-                const json = await res.json();
-                console.log(json);
-                console.log(typeof(json));
-                setReviews(json.reviews);
-            }
-        }
-        startFetching();
-        return () => {
-            ignore = true;
-        }
+        if (fetched) setReviews(fetched);
     }, [])
+
+    function handleLeftArrow() {
+        if (currentReviewIndex - howManyReviews < 0) {
+            if (reviews.length % howManyReviews === 0) {
+                setCurrentReviewIndex(reviews.length - howManyReviews);
+            } else {
+                setCurrentReviewIndex(reviews.length - (reviews.length % howManyReviews));
+            }
+        } else {
+            setCurrentReviewIndex(currentReviewIndex - howManyReviews);
+        }
+    }
+
+    function handleRightArrow() {
+        if (currentReviewIndex + howManyReviews >= reviews.length) {
+            setCurrentReviewIndex(0)
+        } else {
+            setCurrentReviewIndex(currentReviewIndex + howManyReviews);
+        }
+    }
+
+
+    function handleSortReviews(e: ChangeEvent<HTMLSelectElement>) {
+        const result = [...reviews];
+        switch (e.target.value) {
+            case 'ID' :
+                setReviews(result.sort((a: Review, b: Review) => a.id - b.id));
+                break;
+            case 'Name' :
+                setReviews(result.sort((a: Review, b: Review) => a.name.localeCompare(b.name)));
+                break;
+            case 'Role' :
+                setReviews(result.sort((a: Review, b: Review) => a.role.localeCompare(b.role)));
+                break;
+            case 'Rating' :
+                setReviews(result.sort((a: Review, b: Review) => a.rating - b.rating));
+                break;
+        }
+    }
 
     return (
         <>
             <section>
-                <h3>Customer Feedback</h3>
+                <h2>Customer Feedback</h2>
+                <label>Sort by: </label>
+                <select id='sort-select' onChange={e => handleSortReviews(e)}>
+                    <option>ID</option>
+                    <option>Name</option>
+                    <option>Role</option>
+                    <option>Rating</option>
+                </select>
                 <div className='reviews'>
-                    {reviews.map(r => {
+                    {reviews.slice(currentReviewIndex, currentReviewIndex + howManyReviews).map(r => {
                         return (
                             <div key={r.id} className='card feedback-card three-column-layout'>
                                 <img src={`images/${r.photo}`} alt={`Profile picture of user: ${r.name}`}></img>
                                 <div>
-                                    <h4>{r.name}, {r.role}</h4>
+                                    <h4 className={r.name.length % 2 === 0 ? 'highlight-even' : ''}>{r.name}, {r.role}</h4>
                                     <p>{r.feedback}</p>
                                 </div>
-                                <h3>{r.rating}⭐</h3>
+                                <h2>{r.rating}⭐</h2>
                             </div>
                         );
                     })}
                 </div>
                 <div className='pagination'>
-                    <button className='arrow' id='left-arrow'>⇦</button>
-                    <button className='arrow' id='right-arrow'>⇨</button>
+                    <button className='arrow' id='left-arrow' onClick={handleLeftArrow}>⇦</button>
+                    <button className='arrow' id='right-arrow' onClick={handleRightArrow}>⇨</button>
                 </div>
             </section>
             <section>
                 <div>
-                    <h3>Leave some feedback!</h3>
+                    <h2>Leave some feedback!</h2>
                     <textarea className='text-area'></textarea>
                     <div className='rating-div'>
                         <p>Rating: </p>

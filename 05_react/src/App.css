@@ -32,7 +32,8 @@ button {
 p,
 a,
 ul,
-button {
+button,
+label {
     font-size: var(--small-text-font-size);
 }
 h1 {
@@ -70,6 +71,17 @@ img {
     display: block;
     border: var(--color-three) 5px solid;
     border-radius: 10%;
+}
+
+select {
+  background-color: var(--color-two);
+  color: var(--color-four);
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+option {
+  background-color: var(--color-one);
+  color: var(--color-four);
 }
 
 .card {
@@ -124,7 +136,8 @@ img {
     p,
     a,
     ul,
-    button {
+    button,
+    label {
         font-size: var(--medium-text-font-size);
     }
 
@@ -159,7 +172,8 @@ img {
     p,
     a,
     ul,
-    button {
+    button,
+    label {
         font-size: var(--large-text-font-size);
     }
 
