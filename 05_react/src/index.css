@@ -24,9 +24,9 @@
     --medium-h1-font-size: 5rem;
     --large-h1-font-size: 7rem;
 
-    --small-h3-font-size: 2rem;
-    --medium-h3-font-size: 2.75rem;
-    --large-h3-font-size: 3.5rem;
+    --small-h2-font-size: 2rem;
+    --medium-h2-font-size: 2.75rem;
+    --large-h2-font-size: 3.5rem;
 }
 
 [data-theme='blue'] {
@@ -47,6 +47,15 @@
     background-color: var(--color-four);
 }
 
+/* for the layout of the page */
+body {
+  /* remove the margins inherited from the browser */
+  margin: 0;
+  margin-inline: auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 
 @media (width < 700px) {
   p, a, ul, button {
@@ -55,8 +64,8 @@
   h1 {
     font-size: var(--small-h1-font-size);
   }
-  h3 {
-    font-size: var(--small-h3-font-size);
+  h2 {
+    font-size: var(--small-h2-font-size);
   }
   button {
     margin-inline-end: 0;
@@ -79,8 +88,8 @@
   h1 {
     font-size: var(--medium-h1-font-size);
   }
-  h3 {
-    font-size: var(--medium-h3-font-size);
+  h2 {
+    font-size: var(--medium-h2-font-size);
   }
   button {
     margin-inline-end: 1rem;
@@ -103,8 +112,8 @@
   h1 {
     font-size: var(--large-h1-font-size);
   }
-  h3 {
-    font-size: var(--large-h3-font-size);
+  h2 {
+    font-size: var(--large-h2-font-size);
   }
   button {
     margin-inline-end: 1rem;

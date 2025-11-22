@@ -8,7 +8,7 @@ import type { ThemeState } from './interfaces/theme-state'
 function App() {
     const [theme, setTheme] = useState<ThemeState>({status: 'red'});
     return (
-        <div className='wrapper' data-theme={theme.status}>
+        <div data-theme={theme.status}>
             <Header theme={theme} setTheme={setTheme}></Header>
             <main>
                 <Landing />

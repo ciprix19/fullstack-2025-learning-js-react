@@ -3,15 +3,13 @@ header {
   top: 0;
   z-index: 10;
   box-shadow: 0px 10px 10px 1px var(--color-two);
-}
-
-.navbar {
   display: flex;
   flex-wrap: wrap;
   inline-size: 100%;
   justify-content: space-between;
   align-items: center;
 }
+
 .nav-menu {
   display: flex;
   justify-content: space-between;
@@ -37,11 +35,9 @@ header {
   border-bottom: var(--color-four) solid 0.2rem;
 }
 
-.logo-div {
+.logo-img {
   display: flex;
   padding: 0.3rem;
-}
-.logo-img {
   margin-inline-end: 1rem;
   border-radius: 50%;
   animation-name: spin;

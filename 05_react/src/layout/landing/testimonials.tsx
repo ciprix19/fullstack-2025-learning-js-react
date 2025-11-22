@@ -39,7 +39,7 @@ export default function Testimonials() {
                     {reviews.map(r => {
                         return (
                             <div key={r.id} className='card feedback-card three-column-layout'>
-                                <img src={r.photo} alt={`Profile picture of user: ${r.name}`}></img>
+                                <img src={`images/${r.photo}`} alt={`Profile picture of user: ${r.name}`}></img>
                                 <div>
                                     <h4>{r.name}, {r.role}</h4>
                                     <p>{r.feedback}</p>

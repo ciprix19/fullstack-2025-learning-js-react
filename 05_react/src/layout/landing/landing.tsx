@@ -1,6 +1,4 @@
 import './styles/landing.css'
-import processDocumentationToolsImage from '../../assets/images/process-documentation-tools-1.jpg'
-import landingImage from '../../assets/images/landing.jpg'
 import Testimonials from './testimonials';
 import GenerateRandomFact from './generate-random-fact';
 
@@ -9,16 +7,14 @@ export default function Landing() {
         <>
             <h1>DISCOVER <span className='dark-text'>DOCUFLOW</span></h1>
             <section>
-                <h3>Document Your Tools, Clearly and Effortlessly</h3>
+                <h2>Document Your Tools, Clearly and Effortlessly</h2>
                 <p>DocuFlow is built for developers, product teams, and creators who need a simple way to write, organize, and share documentation about their tools.</p>
-                <figure>
-                    <img src={processDocumentationToolsImage} alt='logo'></img>
-                </figure>
+                <img src={'images/process-documentation-tools-1.jpg'} alt='logo'></img>
             </section>
             <section>
                 <div className='two-column-layout'>
                     <div className='card right-shadow'>
-                        <h3>Built for Documentation About Tools</h3>
+                        <h2>Built for Documentation About Tools</h2>
                         <ul>
                             <li>Structured Templates - Start faster with ready-to-use documentation templates.</li>
                             <li>Versioning - Keep your docs up-to-date with automatic version control.</li>
@@ -27,23 +23,19 @@ export default function Landing() {
                             <li>Export & Share - Publish as websites, PDFs, or API docs.</li>
                         </ul>
                     </div>
-                    <figure>
-                        <img src={landingImage} alt='logo'></img>
-                    </figure>
+                    <img src={'images/landing.jpg'} alt='logo'></img>
                 </div>
             </section>
             <section>
-                <h3>Writing Documentation Doesn't Have to Be Hard</h3>
+                <h2>Writing Documentation Doesn't Have to Be Hard</h2>
                 <p>Too often, documentation gets scattered across files, wikis, and outdated notes. DocuFlow streamlines the process by
                     giving you a dedicated space to create structured, easy-to-read documentation that actually helps people use your tool.</p>
             </section>
             <section>
                 <div className='two-column-layout'>
-                    <figure>
-                        <img src={landingImage} alt='logo'></img>
-                    </figure>
+                    <img src={'images/landing.jpg'} alt='logo'></img>
                     <div className='card left-shadow'>
-                        <h3>Why Choose DocuFlow?</h3>
+                        <h2>Why Choose DocuFlow?</h2>
                         <ul className='emoji-list'>
                             <li>Focused on documenting tools, not just generic note-taking.</li>
                             <li>Designed with developers and product teams in mind.</li>

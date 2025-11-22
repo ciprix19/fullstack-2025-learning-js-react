@@ -1,19 +1,8 @@
-.wrapper {
-  max-inline-size: 1200px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
 main {
   margin: 3rem;
 }
 
-/* for the layout of the page */
-body {
-  /* remove the margins inherited from the browser */
-  margin: 0;
-}
+
 
 /* google font */
 body, button {
