@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    /* colors are defined by darkness, with color-one being the darkest and color-four the least */
+    --red-one: #3E0703;
+    --red-two: #660B05;
+    --red-three: #8C1007;
+    --red-four: #FFF0C4;
+
+    /* funky */
+
+    --blue-one: #113F67;
+    --blue-two: #34699A;
+    --blue-three: #58A0C8;
+    --blue-four: #FDF5AA;
+
+    --small-text-font-size: 1.25rem;
+    --medium-text-font-size: 1.35rem;
+    --large-text-font-size: 1.5rem;
+
+    --small-h1-font-size: 3.25rem;
+    --medium-h1-font-size: 5rem;
+    --large-h1-font-size: 7rem;
+
+    --small-h2-font-size: 2rem;
+    --medium-h2-font-size: 2.75rem;
+    --large-h2-font-size: 3.5rem;
+}
+
+[data-theme='blue'] {
+    --color-one: var(--blue-one);
+    --color-two: var(--blue-two);
+    --color-three: var(--blue-three);
+    --color-four: var(--blue-four);
+    color: var(--color-three);
+    background-color: var(--color-four);
+}
+
+[data-theme='red'] {
+    --color-one: var(--red-one);
+    --color-two: var(--red-two);
+    --color-three: var(--red-three);
+    --color-four: var(--red-four);
+    color: var(--color-three);
+    background-color: var(--color-four);
+}
+

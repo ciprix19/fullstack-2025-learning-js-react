@@ -1,0 +1,100 @@
+{
+  "reviews": [
+    {
+      "id": 1,
+      "name": "Jane Doe",
+      "role": "Marketing Manager at BrightCo",
+      "photo": "profile-pic.jpg",
+      "feedback": "This product completely transformed our workflow! The product is outstanding.",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Michael Lee",
+      "role": "Freelance Designer",
+      "photo": "profile-pic.jpg",
+      "feedback": "Simple, clean, and efficient. Exactly what I needed to manage my documentations.",
+      "rating": 4.5
+    },
+    {
+      "id": 3,
+      "name": "Sara Ahmed",
+      "role": "Startup Founder",
+      "photo": "profile-pic.jpg",
+      "feedback": "A reliable solution that saves us time every single day.",
+      "rating": 4.8
+    },
+    {
+      "id": 4,
+      "name": "David Kim",
+      "role": "Product Engineer at NovaTech",
+      "photo": "profile-pic.jpg",
+      "feedback": "Our team productivity improved by at least 30%. The UI is intuitive and fast.",
+      "rating": 4.9
+    },
+    {
+      "id": 5,
+      "name": "Olivia Brown",
+      "role": "Content Strategist",
+      "photo": "profile-pic.jpg",
+      "feedback": "I love how seamless the integration was. It just worked right out of the box!",
+      "rating": 4.7
+    },
+    {
+      "id": 6,
+      "name": "Carlos Mendez",
+      "role": "Operations Director at FlowLogix",
+      "photo": "profile-pic.jpg",
+      "feedback": "The customer support team is exceptional — quick responses and real solutions.",
+      "rating": 5
+    },
+    {
+      "id": 7,
+      "name": "Emily Zhang",
+      "role": "UX Researcher",
+      "photo": "profile-pic.jpg",
+      "feedback": "I’ve tested many tools, but this one consistently delivers results. Highly recommended!",
+      "rating": 4.6
+    },
+    {
+      "id": 8,
+      "name": "Robert Wilson",
+      "role": "Project Manager at BuildSmart",
+      "photo": "profile-pic.jpg",
+      "feedback": "Clear reporting, great analytics, and the learning curve is minimal.",
+      "rating": 4.4
+    },
+    {
+      "id": 9,
+      "name": "Ananya Patel",
+      "role": "Entrepreneur",
+      "photo": "profile-pic.jpg",
+      "feedback": "It feels like it was designed specifically for small businesses like mine. Love it!",
+      "rating": 5
+    },
+    {
+      "id": 10,
+      "name": "Lucas Johnson",
+      "role": "Software Developer",
+      "photo": "profile-pic.jpg",
+      "feedback": "Stable, well-documented, and performs better than alternatives we tried.",
+      "rating": 4.7
+    },
+    {
+      "id": 11,
+      "name": "Maria Rossi",
+      "role": "HR Consultant",
+      "photo": "profile-pic.jpg",
+      "feedback": "I appreciate how much thought went into the details — even small things are polished.",
+      "rating": 4.8
+    },
+    {
+      "id": 12,
+      "name": "Ethan Clark",
+      "role": "Data Analyst",
+      "photo": "profile-pic.jpg",
+      "feedback": "Fast, accurate, and easy to integrate with our existing workflow.",
+      "rating": 4.9
+    }
+  ]
+}

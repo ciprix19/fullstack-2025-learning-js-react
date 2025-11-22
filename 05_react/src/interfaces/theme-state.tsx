@@ -1,0 +1,1 @@
+export type ThemeState = { status: 'red' } | { status: 'blue' }
