@@ -1,31 +1,26 @@
-function setTheme(theme) {
-    var r = document.documentElement;
-    var rs = getComputedStyle(r);
-    let themeArr = [
-        rs.getPropertyValue(`--${theme}-one`),
-        rs.getPropertyValue(`--${theme}-two`),
-        rs.getPropertyValue(`--${theme}-three`),
-        rs.getPropertyValue(`--${theme}-four`)
-    ];
-    r.style.setProperty('--color-one', themeArr[0]);
-    r.style.setProperty('--color-two', themeArr[1]);
-    r.style.setProperty('--color-three', themeArr[2]);
-    r.style.setProperty('--color-four', themeArr[3]);
-}
-
 function handleTheme() {
-    // setTheme(theme == 'light' ? 'dark' : 'light');
-    if (theme == 'light') { // change to dark
-        theme = 'dark';
-
-    } else if (theme == 'dark') { // change to light
-        theme = 'light';
+    function changeTheme() {
+        const changedTheme = isLightTheme ? 'dark' : 'light';
+        const r = document.documentElement;
+        const rs = getComputedStyle(r);
+        const themeArr = [
+            rs.getPropertyValue(`--${changedTheme}-one`),
+            rs.getPropertyValue(`--${changedTheme}-two`),
+            rs.getPropertyValue(`--${changedTheme}-three`),
+            rs.getPropertyValue(`--${changedTheme}-four`)
+        ];
+        r.style.setProperty('--color-one', themeArr[0]);
+        r.style.setProperty('--color-two', themeArr[1]);
+        r.style.setProperty('--color-three', themeArr[2]);
+        r.style.setProperty('--color-four', themeArr[3]);
+        isLightTheme = !isLightTheme;
     }
-    setTheme(theme);
+
+    changeTheme();
 }
 
 // handle change theme button
-let theme = 'light'; // theme on startup
+let isLightTheme = true;
 const button = document.querySelector('.change-theme-button');
 button.addEventListener('click', handleTheme);
 
@@ -42,14 +37,13 @@ hamburger.addEventListener('click', () => {
 // fetch data from URL
 async function fetchData(url) {
     try {
-        let response = await fetch(url);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        data = await response.json();
-        return data;
+        return response.json();
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 }
 
@@ -63,7 +57,7 @@ function createReviewFromCustomer(customer) {
     // id in front for testing buttonReviewLeft and buttonReviewRight
     // customerNameAndRole.textContent = customer.id + ', ' +  customer.name + ', ' + customer.role;
     customerNameAndRole.textContent = customer.name + ', ' + customer.role;
-    customerFeedback.textContent = `"${customer.feedback}"`;
+    customerFeedback.textContent = customer.feedback;
     customerRating.textContent = customer.rating + '⭐';
     customerPhoto.setAttribute('src', './images/' + customer.photo);
 
@@ -121,12 +115,9 @@ async function displayReviews(url, position, nOfReviews) {
     while (reviewsDiv.hasChildNodes()) {
         reviewsDiv.removeChild(reviewsDiv.firstChild);
     }
-    for (let i = position; i < position + nOfReviews; i++) {
-        if (i == allReviews.reviews.length) {
-            break;
-        }
-        let reviewFromCustomer = createReviewFromCustomer(allReviews.reviews[i]);
-        let newDiv = createReviewLayout(reviewFromCustomer);
+    for (let i = position; i < position + nOfReviews && i < allReviews.reviews.length; i++) {
+        const reviewFromCustomer = createReviewFromCustomer(allReviews.reviews[i]);
+        const newDiv = createReviewLayout(reviewFromCustomer);
         reviewsDiv.appendChild(newDiv);
     }
 }
@@ -220,7 +211,7 @@ async function displayUselessFact(url) {
 displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/randomAAAA');
 
 const buttonFact = document.querySelector('.button-fact');
-// i can pass variables inside functions using lambda
+// i can pass letiables inside functions using arrow function
 buttonFact.addEventListener('click', () => displayUselessFact('https://uselessfacts.jsph.pl/api/v2/facts/random'));
 
 // i guess these are inline styles?

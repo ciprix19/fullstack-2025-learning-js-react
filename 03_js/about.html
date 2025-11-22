@@ -14,73 +14,62 @@
         <link rel="stylesheet" href="styles/styles.css" />
     </head>
     <body>
-        <div class="wrapper">
-            <header class="gradient-bg">
-                <!-- primary navigation -->
-                <nav class="navbar" aria-label="Primary-navigation">
-                    <!-- logo made of an image and text -->
-                    <div class="logo-div">
-                        <img class="logo-img" src="images/logo_new.png" alt="logo" title=":P">
-                        <p>DocuFlow</p>
+        <header class="gradient-bg">
+            <img class="logo-img" src="images/logo_new.png" alt="logo" title=":P">
+            <nav class="navbar" aria-label="Primary-navigation">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html">Home</a></li>
+                    <li class="nav-item"><a href="about.html">About</a></li>
+                    <li class="nav-item"><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+            <!-- change theme button -->
+            <div class="change-theme">
+                <button class="change-theme-button">Change Theme</button>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </header>
+        <main>
+            <h1>LEARN MORE ABOUT <span class="dark-text">DOCUFLOW</span></h1>
+            <section>
+                <div class="two-column-layout">
+                    <div class="card left-shadow">
+                        <h2>About DocuFlow</h2>
+                        <p>DocuFlow is a simple, focused tool for writing documentation about your tools.
+                            We created it to make documenting easier, faster, and less frustrating.</p>
                     </div>
-                    <ul class="nav-menu">
-                        <li class="nav-item"><a href="landing.html">Home</a></li>
-                        <li class="nav-item"><a href="about.html">About</a></li>
-                        <li class="nav-item"><a href="login.html">Login</a></li>
-                    </ul>
-                    <!-- change theme button -->
-                    <div class="change-theme">
-                        <button class="change-theme-button">Change Theme</button>
+                    <img src="images/about.png" alt="logo">
+                </div>
+            </section>
+            <section>
+                <div class="two-column-layout">
+                    <img src="images/side-view-man-working-with-post-its_23-2149930950.avif" alt="logo">
+                    <div class="card right-shadow">
+                        <h2>Our Mission</h2>
+                        <p>To help developers and teams create clear, structured documentation that makes their tools easier to use and share.</p>
                     </div>
-                    <div class="hamburger">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
+                </div>
+            </section>
+            <section>
+                <div class="two-column-layout">
+                    <div class="card left-shadow">
+                        <h2>Values</h2>
+                        <ul>
+                            <li>Clarity first</li>
+                            <li>Collaboration made simple</li>
+                            <li>Always up to date</li>
+                        </ul>
                     </div>
-                </nav>
-            </header>
-            <main>
-                <h1>LEARN MORE ABOUT <span class="dark-text">DOCUFLOW</span></h1>
-                <section>
-                    <div class="two-column-layout">
-                        <div class="card left-shadow">
-                            <h3>About DocuFlow</h3>
-                            <p>DocuFlow is a simple, focused tool for writing documentation about your tools.
-                                We created it to make documenting easier, faster, and less frustrating.</p>
-                        </div>
-                        <figure>
-                            <img src="images/about.png" alt="logo">
-                        </figure>
-                    </div>
-                </section>
-                <section>
-                    <div class="two-column-layout">
-                        <figure>
-                            <img src="images/side-view-man-working-with-post-its_23-2149930950.avif" alt="logo">
-                        </figure>
-                        <div class="card right-shadow">
-                            <h3>Our Mission</h3>
-                            <p>To help developers and teams create clear, structured documentation that makes their tools easier to use and share.</p>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div class="two-column-layout">
-                        <div class="card left-shadow">
-                            <h3>Values</h3>
-                            <ul>
-                                <li>Clarity first</li>
-                                <li>Collaboration made simple</li>
-                                <li>Always up to date</li>
-                            </ul>
-                        </div>
-                        <div class="rectangle"></div>
-                    </div>
-                </section>
-            </main>
-            <footer class="gradient-bg">
-                <p>ciprianbarbuta@gmail.com</p>
-            </footer>
-        </div>
+                    <div class="rectangle"></div>
+                </div>
+            </section>
+        </main>
+        <footer class="gradient-bg">
+            <p>ciprianbarbuta@gmail.com</p>
+        </footer>
     </body>
 </html>
