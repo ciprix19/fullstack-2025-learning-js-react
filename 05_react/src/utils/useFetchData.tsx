@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-export function useFetchData(url: string) {
-    const [data, setData] = useState([]);
+export default function useFetchData<T = any>(url: string) : T | null {
+    const [data, setData] = useState<T | null>(null);
     useEffect(() => {
         if (url) {
             let ignore = false;
@@ -16,6 +16,6 @@ export function useFetchData(url: string) {
                 ignore = true;
             }
         }
-    }, [url])
+    }, [url]);
     return data;
 }

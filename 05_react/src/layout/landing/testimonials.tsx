@@ -1,5 +1,5 @@
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { useFetchData } from '../../utils/useFetchData';
+import useFetchData from '../../utils/useFetchData';
 
 type Review = {
     id: number;
@@ -19,8 +19,10 @@ export default function Testimonials() {
     const [currentReviewIndex, setCurrentReviewIndex] = useState<number>(0);
 
     useEffect(() => {
-        if (fetched) setReviews(fetched);
-    }, [])
+        if (fetched) {
+            setReviews(fetched.reviews);
+        }
+    }, [fetched]);
 
     function handleLeftArrow() {
         if (currentReviewIndex - howManyReviews < 0) {
@@ -56,7 +58,7 @@ export default function Testimonials() {
                 setReviews(result.sort((a: Review, b: Review) => a.role.localeCompare(b.role)));
                 break;
             case 'Rating' :
-                setReviews(result.sort((a: Review, b: Review) => a.rating - b.rating));
+                setReviews(result.sort((a: Review, b: Review) => b.rating - a.rating));
                 break;
         }
     }

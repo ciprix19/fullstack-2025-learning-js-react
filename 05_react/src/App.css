@@ -42,6 +42,9 @@ h1 {
 h2 {
     font-size: var(--small-h2-font-size);
 }
+h3 {
+    font-size: var(--small-h3-font-size);
+}
 button {
     margin-inline-end: 0;
 }
@@ -149,6 +152,10 @@ option {
         font-size: var(--medium-h2-font-size);
     }
 
+    h3 {
+        font-size: var(--medium-h3-font-size);
+    }
+
     button {
         margin-inline-end: 1rem;
     }
@@ -183,6 +190,10 @@ option {
 
     h2 {
         font-size: var(--large-h2-font-size);
+    }
+
+    h3 {
+        font-size: var(--large-h3-font-size);
     }
 
     button {
