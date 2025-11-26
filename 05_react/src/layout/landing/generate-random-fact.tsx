@@ -17,12 +17,12 @@ export default function GenerateRandomFact() {
     // todo - add items in div
     useEffect(() => {
         if (fetched) {
-            console.log(fetched);
             setRandomFact(fetched);
         }
     }, [fetched]);
 
     function handleButtonFact() {
+        localStorage.removeItem('theme');
         fetch('https://uselessfacts.jsph.pl/api/v2/facts/random')
             .then(response => response.json())
             .then(json => setRandomFact(json));

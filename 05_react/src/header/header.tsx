@@ -11,8 +11,8 @@ export default function Header({ theme, setTheme }: HeaderProps ) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     function changeTheme() {
-        console.log(theme);
-        setTheme({ status: theme.status === 'red' ? 'blue': 'red'});
+        localStorage.setItem('theme', theme.status === 'red' ? 'blue': 'red');
+        setTheme({ status: theme.status === 'red' ? 'blue': 'red' });
     }
 
     function toggleMenu() {

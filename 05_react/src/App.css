@@ -133,6 +133,14 @@ option {
   margin-inline-end: 2rem;
 }
 
+.loading-screen {
+    block-size: 100vh;
+    inline-size: 100vw;
+    display: grid;
+    place-items: center;
+    font-size: var(--large-h1-font-size);
+}
+
 
 @media screen and (width > 620px) {
 
