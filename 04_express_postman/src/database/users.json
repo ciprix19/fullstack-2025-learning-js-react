@@ -2,8 +2,18 @@
     "users": [
         {
             "id": 0,
-            "email": "abc@mail.com",
-            "password": "pass"
+            "email": "a@mail.com",
+            "password": "125"
+        },
+        {
+            "id": 1,
+            "email": "c@mail.com",
+            "password": "11"
+        },
+        {
+            "id": 2,
+            "email": "b@mail.com",
+            "password": "123"
         }
     ]
 }
