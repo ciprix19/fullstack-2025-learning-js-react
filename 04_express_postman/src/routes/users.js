@@ -2,16 +2,8 @@ const express = require('express');
 const userRouter = express.Router();
 const config = require('../config.json');
 const { readFileSync, writeFileSync, write, writeFile } = require('fs');
+const bcrypt = require('bcrypt');
 
-// {
-//     "users": [
-//         {
-//             "id": "0",
-//             "email": "a@email.com",
-//             "password": "123"
-//         }
-//     ]
-// }
 let usersData = JSON.parse(readFileSync(config.usersURL));
 
 userRouter.get('/', (req, res) => {
@@ -23,6 +15,7 @@ userRouter.get('/:userId', (req, res) => {
     const user = usersData.users.find(u => u.id === id);
 
     if (!user) {
+
         return res.status(404).json({ error: "User not found" });
     }
 
@@ -30,7 +23,7 @@ userRouter.get('/:userId', (req, res) => {
 });
 
 // todo: password hashing
-userRouter.post('/signup', (req, res) => {
+userRouter.post('/signup', async (req, res) => {
     const { email, password, confirmPassword } = req.body;
 
     if (!email || !password || !confirmPassword) {
@@ -43,10 +36,12 @@ userRouter.post('/signup', (req, res) => {
         return res.status(400).json({ error: 'Email already registered' });
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = {
         id: usersData.users.length,
         email,
-        password
+        hashedPassword
     }
     usersData.users.push(newUser);
     writeFileSync(config.usersURL, JSON.stringify(usersData, null, 4));
@@ -57,26 +52,42 @@ userRouter.post('/signup', (req, res) => {
     })
 });
 
-userRouter.post('/login', (req, res) => {
+userRouter.post('/login', async (req, res) => {
+    const { email, password } = req.body;
 
+    const user = usersData.users.find(u => u.email === email);
+    if (user === undefined) {
+        return res.status(400).json({ error: 'Email not found' });
+    }
+
+    const match = await bcrypt.compare(password, user.hashedPassword);
+    if (!match) {
+        return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    res.status(200).json({
+        message: 'User successfully logged in',
+        user: user
+    });
 });
 
-userRouter.patch('/change-password', (req, res) => {
-    const { email, newPassword, confirmNewPassword } = req.body;
+userRouter.patch('/change-password', async (req, res) => {
+    const { email, password, confirmPassword } = req.body;
 
-    if (!email || !newPassword || !confirmNewPassword) {
+    if (!email || !password || !confirmPassword) {
         return res.status(400).json({ error: 'Missing fields' });
     }
     if (!usersData.users.find(u => u.email === email)) {
         return res.status(400).json({ error: 'Email not found' });
     }
-    if (newPassword !== confirmNewPassword) {
+    if (password !== confirmPassword) {
         return res.status(400).json({ error: 'Passwords do not match' });
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
     usersData.users.map(u => {
         if (u.email === email) {
-            u.password = newPassword;
+            u.hashedPassword = hashedPassword;
         }
     });
 
