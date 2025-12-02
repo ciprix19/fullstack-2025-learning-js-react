@@ -3,11 +3,34 @@ const userRouter = express.Router();
 const config = require('../config.json');
 const { readFileSync, writeFileSync, write, writeFile } = require('fs');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const secretKey = config.secretKey;
 
 let usersData = JSON.parse(readFileSync(config.usersURL));
+let tokensData = JSON.parse(readFileSync(config.refreshTokensURL));
 
-userRouter.get('/', (req, res) => {
-    res.json(JSON.parse(data));
+if (tokensData.refreshTokens.length === undefined) {
+    tokensData.refreshTokens = [];
+}
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    // if i have authHeader...
+    const token = authHeader && authHeader.split(' ')[1]; //token looks like: Bearer[0] TOKEN[1]
+
+    if (token == null) return res.sendStatus(401).json({ error: 'Missing access token' });
+
+    jwt.verify(token, secretKey, (err, user) => {
+        if (err) return res.sendStatus(403).json({ error: 'Token is not valid' })
+        req.user = user;
+        next();
+    });
+}
+
+// works only if you are logged in
+userRouter.get('/', authenticateToken, (req, res) => {
+    // res.json(usersData.users.filter(u => u.id === req.user.id));
+    res.json(usersData);
 });
 
 userRouter.get('/:userId', (req, res) => {
@@ -15,14 +38,12 @@ userRouter.get('/:userId', (req, res) => {
     const user = usersData.users.find(u => u.id === id);
 
     if (!user) {
-
         return res.status(404).json({ error: "User not found" });
     }
 
     res.json(user);
 });
 
-// todo: password hashing
 userRouter.post('/signup', async (req, res) => {
     const { email, password, confirmPassword } = req.body;
 
@@ -52,6 +73,26 @@ userRouter.post('/signup', async (req, res) => {
     })
 });
 
+
+function generateAccessToken(user) {
+    return jwt.sign(user, secretKey, { expiresIn: config.expiresIn });
+}
+
+
+// generate access token based on refresh token from json db
+userRouter.post('/token', (req, res) => {
+    console.log(tokensData.refreshTokens);
+    const refreshToken = req.body.token;
+    if (refreshToken == null) return res.sendStatus(401).json({ error: 'Missing refreshToken' });
+    if (!tokensData.refreshTokens.includes(refreshToken)) return res.sendStatus(403).json({ error: 'Wrong refresh token' });
+    jwt.verify(refreshToken, secretKey, (err, user) => {
+        if (err) return res.sendStatus(403).json({ error: err });
+        const accessToken = generateAccessToken({ id: user.id, email: user.email });
+        res.json({ accessToken: accessToken });
+    });
+})
+
+// todo use jwt
 userRouter.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -64,10 +105,18 @@ userRouter.post('/login', async (req, res) => {
     if (!match) {
         return res.status(400).json({ error: 'Invalid credentials' });
     }
+    // const accessToken = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '15s' });
+    const accessToken = generateAccessToken({ id: user.id, email: user.email });
+    const refreshToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
+    tokensData.refreshTokens.push(refreshToken);
+    console.log(tokensData);
+    writeFileSync(config.refreshTokensURL, JSON.stringify(tokensData, null, 4));
 
     res.status(200).json({
-        message: 'User successfully logged in',
-        user: user
+        // message: 'User successfully logged in',
+        // user: user
+        accessToken: accessToken,
+        refreshToken: refreshToken
     });
 });
 
@@ -96,6 +145,12 @@ userRouter.patch('/change-password', async (req, res) => {
     res.status(200).json({
         message: 'User updated successfully',
     })
+});
+
+userRouter.delete('/logout', (req, res) => {
+    tokensData.refreshTokens = tokensData.refreshTokens.filter(token => token !== req.body.token);
+    writeFileSync(config.refreshTokensURL, JSON.stringify(tokensData, null, 4));
+    res.sendStatus(204);
 });
 
 userRouter.delete('/delete', (req, res) => {

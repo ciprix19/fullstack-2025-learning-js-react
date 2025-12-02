@@ -6,16 +6,6 @@
             "hashedPassword": "$2b$10$xsDkDkg1bGCiubgWJX7Ia.wQtw3yejL5arYdJwE/yubHXoZU0sLRy"
         },
         {
-            "id": 1,
-            "email": "c@mail.com",
-            "hashedPassword": "11"
-        },
-        {
-            "id": 2,
-            "email": "b@mail.com",
-            "hashedPassword": "123"
-        },
-        {
             "id": 3,
             "email": "d@mail.com",
             "hashedPassword": "$2b$10$h2dGwqv7/di1gj9PFwpSHe3T5/cccez/nd/tIPgw0QG/op0SZ/IHK"

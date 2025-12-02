@@ -1,5 +1,8 @@
 {
     "port": "3000",
+    "refreshTokensURL": "./src/database/refreshTokens.json",
     "reviewsURL": "./src/database/reviews.json",
-    "usersURL": "./src/database/users.json"
+    "usersURL": "./src/database/users.json",
+    "secretKey": "secret-key",
+    "expiresIn": "1h"
 }
