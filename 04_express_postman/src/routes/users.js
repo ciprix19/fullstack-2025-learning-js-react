@@ -9,6 +9,11 @@ const secretKey = config.secretKey;
 let usersData = JSON.parse(readFileSync(config.usersURL));
 let tokensData = JSON.parse(readFileSync(config.refreshTokensURL));
 
+let usersIdCount = 0;
+if (usersData.users.length !== undefined) {
+    usersIdCount = usersData.users.reduce((max, user) => Math.max(max, user.id), 0) + 1;
+}
+
 if (tokensData.refreshTokens.length === undefined) {
     tokensData.refreshTokens = [];
 }
@@ -18,10 +23,10 @@ function authenticateToken(req, res, next) {
     // if i have authHeader...
     const token = authHeader && authHeader.split(' ')[1]; //token looks like: Bearer[0] TOKEN[1]
 
-    if (token == null) return res.sendStatus(401).json({ error: 'Missing access token' });
+    if (token == null) return res.status(401).json({ error: 'Missing access token' });
 
     jwt.verify(token, secretKey, (err, user) => {
-        if (err) return res.sendStatus(403).json({ error: 'Token is not valid' })
+        if (err) return res.status(403).json({ error: 'Token is not valid' })
         req.user = user;
         next();
     });
@@ -60,7 +65,7 @@ userRouter.post('/signup', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = {
-        id: usersData.users.length,
+        id: usersIdCount++,
         email,
         hashedPassword
     }
@@ -83,10 +88,10 @@ function generateAccessToken(user) {
 userRouter.post('/token', (req, res) => {
     console.log(tokensData.refreshTokens);
     const refreshToken = req.body.token;
-    if (refreshToken == null) return res.sendStatus(401).json({ error: 'Missing refreshToken' });
-    if (!tokensData.refreshTokens.includes(refreshToken)) return res.sendStatus(403).json({ error: 'Wrong refresh token' });
+    if (refreshToken == null) return res.status(401).json({ error: 'Missing refreshToken' });
+    if (!tokensData.refreshTokens.includes(refreshToken)) return res.status(403).json({ error: 'Wrong refresh token' });
     jwt.verify(refreshToken, secretKey, (err, user) => {
-        if (err) return res.sendStatus(403).json({ error: err });
+        if (err) return res.status(403).json({ error: err });
         const accessToken = generateAccessToken({ id: user.id, email: user.email });
         res.json({ accessToken: accessToken });
     });
@@ -105,7 +110,6 @@ userRouter.post('/login', async (req, res) => {
     if (!match) {
         return res.status(400).json({ error: 'Invalid credentials' });
     }
-    // const accessToken = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '15s' });
     const accessToken = generateAccessToken({ id: user.id, email: user.email });
     const refreshToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
     tokensData.refreshTokens.push(refreshToken);
@@ -150,11 +154,13 @@ userRouter.patch('/change-password', async (req, res) => {
 userRouter.delete('/logout', (req, res) => {
     tokensData.refreshTokens = tokensData.refreshTokens.filter(token => token !== req.body.token);
     writeFileSync(config.refreshTokensURL, JSON.stringify(tokensData, null, 4));
-    res.sendStatus(204);
+    res.status(204).json({ message: 'Logout successful' });
 });
 
-userRouter.delete('/delete', (req, res) => {
-
+userRouter.delete('/delete', authenticateToken, (req, res) => {
+    usersData.users = usersData.users.filter(u => u.id !== req.user.id);
+    writeFileSync(config.usersURL, JSON.stringify(usersData, null, 4));
+    res.status(204).json({ message: 'Delete successful' });
 });
 
 module.exports = userRouter;

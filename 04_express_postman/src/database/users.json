@@ -11,9 +11,24 @@
             "hashedPassword": "$2b$10$h2dGwqv7/di1gj9PFwpSHe3T5/cccez/nd/tIPgw0QG/op0SZ/IHK"
         },
         {
-            "id": 4,
+            "id": 2,
             "email": "e@mail.com",
-            "hashedPassword": "$2b$10$ltZmwu1XxiVnMCf1UmFSfet0SAi.fc8w5m9cNvDLhscgmVeW2EfSW"
+            "hashedPassword": "$2b$10$/wtQlkyYHH4MLloQm67NEOpAYISdZwDh/ykw5SWC9rFyoTwV4GBnK"
+        },
+        {
+            "id": 4,
+            "email": "f@mail.com",
+            "hashedPassword": "$2b$10$W0YF2YDb0DOjhInbT8hooeM6HVOe8jKFNIphGUL4zMoKOS1DhM6Ky"
+        },
+        {
+            "id": 5,
+            "email": "g@mail.com",
+            "hashedPassword": "$2b$10$rXg.O78VjReYLyT3vmcWPeuEcAv48yLlVfJM/SBrvshvj8Fhd2UsC"
+        },
+        {
+            "id": 6,
+            "email": "x@mail.com",
+            "hashedPassword": "$2b$10$Y5F7/i3ur5HIGM4w08VzDuatwsX3MstT2JwXcVcvbwqRxLsP9.RQ."
         }
     ]
 }
