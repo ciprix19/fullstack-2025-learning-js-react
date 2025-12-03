@@ -9,6 +9,7 @@
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
+
 @keyframes crazy_spin {
   0% {
     transform: rotateX(0) rotateY(0) rotateZ(0);

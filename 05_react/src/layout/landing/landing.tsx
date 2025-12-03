@@ -4,7 +4,7 @@ import GenerateRandomFact from './generate-random-fact';
 
 export default function Landing() {
     return (
-        <>
+        <main>
             <h1>DISCOVER <span className='dark-text'>DOCUFLOW</span></h1>
             <section>
                 <h2>Document Your Tools, Clearly and Effortlessly</h2>
@@ -46,6 +46,6 @@ export default function Landing() {
             </section>
             <Testimonials />
             <GenerateRandomFact />
-        </>
+        </main>
     );
 }

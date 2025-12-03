@@ -14,7 +14,7 @@ type Reviews = Review[];
 
 let howManyReviews = 3;
 export default function Testimonials() {
-    const fetched = useFetchData('/database/reviews.json');
+    const fetched = useFetchData('http://localhost:3000/testimonials');
     const [reviews, setReviews] = useState<Reviews>([]);
     const [currentReviewIndex, setCurrentReviewIndex] = useState<number>(0);
 
