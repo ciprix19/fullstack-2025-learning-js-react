@@ -23,10 +23,10 @@ function authenticateToken(req, res, next) {
     // if i have authHeader...
     const token = authHeader && authHeader.split(' ')[1]; //token looks like: Bearer[0] TOKEN[1]
 
-    if (token == null) return res.status(401).json({ error: 'Missing access token' });
+    if (token == null) return res.status(401).json({ message: 'Missing access token' });
 
     jwt.verify(token, secretKey, (err, user) => {
-        if (err) return res.status(403).json({ error: 'Token is not valid' })
+        if (err) return res.status(403).json({ message: 'Token is not valid' })
         req.user = user;
         next();
     });
@@ -43,7 +43,7 @@ userRouter.get('/:userId', (req, res) => {
     const user = usersData.users.find(u => u.id === id);
 
     if (!user) {
-        return res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ message: "User not found" });
     }
 
     res.json(user);
@@ -53,13 +53,13 @@ userRouter.post('/signup', async (req, res) => {
     const { email, password, confirmPassword } = req.body;
 
     if (!email || !password || !confirmPassword) {
-        return res.status(400).json({ error: 'Missing fields' });
+        return res.status(400).json({ message: 'Missing fields' });
     }
     if (password !== confirmPassword) {
-        return res.status(400).json({ error: 'Passwords do not match' });
+        return res.status(400).json({ message: 'Passwords do not match' });
     }
     if (usersData.users.find(u => u.email === email)) {
-        return res.status(400).json({ error: 'Email already registered' });
+        return res.status(400).json({ message: 'Email already registered' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -73,7 +73,7 @@ userRouter.post('/signup', async (req, res) => {
     writeFileSync(config.usersURL, JSON.stringify(usersData, null, 4));
 
     res.status(201).json({
-        message: 'User created successfully',
+        message: 'Sign up successful',
         user: newUser
     })
 });
@@ -88,10 +88,10 @@ function generateAccessToken(user) {
 userRouter.post('/token', (req, res) => {
     console.log(tokensData.refreshTokens);
     const refreshToken = req.body.token;
-    if (refreshToken == null) return res.status(401).json({ error: 'Missing refreshToken' });
-    if (!tokensData.refreshTokens.includes(refreshToken)) return res.status(403).json({ error: 'Wrong refresh token' });
+    if (refreshToken == null) return res.status(401).json({ message: 'Missing refreshToken' });
+    if (!tokensData.refreshTokens.includes(refreshToken)) return res.status(403).json({ message: 'Wrong refresh token' });
     jwt.verify(refreshToken, secretKey, (err, user) => {
-        if (err) return res.status(403).json({ error: err });
+        if (err) return res.status(403).json({ message: err });
         const accessToken = generateAccessToken({ id: user.id, email: user.email });
         res.json({ accessToken: accessToken });
     });
@@ -103,12 +103,12 @@ userRouter.post('/login', async (req, res) => {
 
     const user = usersData.users.find(u => u.email === email);
     if (user === undefined) {
-        return res.status(400).json({ error: 'Email not found' });
+        return res.status(400).json({ message: 'Email not found' });
     }
 
     const match = await bcrypt.compare(password, user.hashedPassword);
     if (!match) {
-        return res.status(400).json({ error: 'Invalid credentials' });
+        return res.status(400).json({ message: 'Invalid credentials' });
     }
     const accessToken = generateAccessToken({ id: user.id, email: user.email });
     const refreshToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
@@ -118,7 +118,7 @@ userRouter.post('/login', async (req, res) => {
 
     res.status(200).json({
         // message: 'User successfully logged in',
-        // user: user
+        user: { id: user.id, email: user.email },
         accessToken: accessToken,
         refreshToken: refreshToken
     });
@@ -128,13 +128,13 @@ userRouter.patch('/change-password', async (req, res) => {
     const { email, password, confirmPassword } = req.body;
 
     if (!email || !password || !confirmPassword) {
-        return res.status(400).json({ error: 'Missing fields' });
+        return res.status(400).json({ message: 'Missing fields' });
     }
     if (!usersData.users.find(u => u.email === email)) {
-        return res.status(400).json({ error: 'Email not found' });
+        return res.status(400).json({ message: 'Email not found' });
     }
     if (password !== confirmPassword) {
-        return res.status(400).json({ error: 'Passwords do not match' });
+        return res.status(400).json({ message: 'Passwords do not match' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

@@ -6,6 +6,8 @@ import Header from './layout/header/header'
 import Landing from './layout/landing/landing'
 import About from './layout/about/about'
 import Login from './layout/login/login'
+import SignUp from './layout/signup/signup'
+import ChangePassword from './layout/change-password/change-password'
 import type { ThemeState } from './interfaces/theme-state'
 import useCheckKey from './utils/useCheckKey'
 import useLoadingState from './utils/useLoadingState'
@@ -32,12 +34,14 @@ function App() {
         <BrowserRouter>
             <div data-theme={theme.status}>
                 <Header theme={theme} setTheme={setTheme}></Header>
-                    <Routes>
-                        <Route path='/' element={<Landing />} />
-                        <Route path='/about' element={<About />} />
-                        <Route path='/login' element={<Login />} />
-                        {/* <Route path='/signup' element={<SignUp />} /> */}
-                    </Routes>
+                <Routes>
+                    <Route path='/' element={<Landing />} />
+                    <Route path='/about' element={<About />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/signup' element={<SignUp />} />
+                    <Route path='/change-password' element={<ChangePassword />}/>
+                    {/* <Route path='/signup' element={<SignUp />} /> */}
+                </Routes>
                 <Footer />
             </div>
         </BrowserRouter>

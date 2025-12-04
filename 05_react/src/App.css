@@ -43,6 +43,9 @@ h2 {
 h3 {
     font-size: var(--small-h3-font-size);
 }
+input {
+    font-size: var(--small-text-font-size);
+}
 button {
     margin-inline-end: 0;
 }
@@ -83,6 +86,13 @@ select {
 option {
   background-color: var(--color-one);
   color: var(--color-four);
+}
+
+input {
+    background-color: var(--color-four);
+    color: var(--color-one);
+    padding: 0.3rem;
+    border-radius: 0.5rem;
 }
 
 .card {
@@ -160,7 +170,7 @@ option {
         font-size: var(--medium-text-font-size);
     }
 
-    .input-rating {
+    input {
         font-size: var(--medium-text-font-size);
     }
 
@@ -203,7 +213,7 @@ option {
         font-size: var(--large-text-font-size);
     }
 
-    .input-rating {
+    input {
         font-size: var(--large-text-font-size);
     }
 }

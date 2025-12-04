@@ -29,6 +29,16 @@
             "id": 6,
             "email": "x@mail.com",
             "hashedPassword": "$2b$10$Y5F7/i3ur5HIGM4w08VzDuatwsX3MstT2JwXcVcvbwqRxLsP9.RQ."
+        },
+        {
+            "id": 7,
+            "email": "cipri@mail.com",
+            "hashedPassword": "$2b$10$cXtFHctltYbelUoaT5bFm.i2FPH8GRr0cGy4DVY.5iHS9QfVxPYMm"
+        },
+        {
+            "id": 8,
+            "email": "asd@mail.com",
+            "hashedPassword": "$2b$10$wLdMObA/cbl.fowsSjkV6.uaR4gvqC.TYSa7GJnh/Nr3t16Ed1dgu"
         }
     ]
 }
