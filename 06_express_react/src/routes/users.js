@@ -85,16 +85,21 @@ function generateAccessToken(user) {
 
 
 // generate access token based on refresh token from json db
+// userRouter.post('/token', (req, res) => {
+//     console.log(tokensData.refreshTokens);
+//     const refreshToken = req.body.token;
+//     if (refreshToken == null) return res.status(401).json({ message: 'Missing refreshToken' });
+//     if (!tokensData.refreshTokens.includes(refreshToken)) return res.status(403).json({ message: 'Wrong refresh token' });
+//     jwt.verify(refreshToken, secretKey, (err, user) => {
+//         if (err) return res.status(403).json({ message: err });
+//         const accessToken = generateAccessToken({ id: user.id, email: user.email });
+//         res.json({ accessToken: accessToken });
+//     });
+// })
+
 userRouter.post('/token', (req, res) => {
-    console.log(tokensData.refreshTokens);
-    const refreshToken = req.body.token;
-    if (refreshToken == null) return res.status(401).json({ message: 'Missing refreshToken' });
-    if (!tokensData.refreshTokens.includes(refreshToken)) return res.status(403).json({ message: 'Wrong refresh token' });
-    jwt.verify(refreshToken, secretKey, (err, user) => {
-        if (err) return res.status(403).json({ message: err });
-        const accessToken = generateAccessToken({ id: user.id, email: user.email });
-        res.json({ accessToken: accessToken });
-    });
+    const token = req.cookies.token.split(' ')[1];
+    console.log(token);
 })
 
 // todo use jwt
@@ -113,14 +118,19 @@ userRouter.post('/login', async (req, res) => {
     const accessToken = generateAccessToken({ id: user.id, email: user.email });
     const refreshToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
     tokensData.refreshTokens.push(refreshToken);
-    console.log(tokensData);
+    // console.log(tokensData);
     writeFileSync(config.refreshTokensURL, JSON.stringify(tokensData, null, 4));
 
-    res.status(200).json({
+    res
+    .status(200)
+    .cookie('token', `Bearer ${refreshToken}`, {
+        expires: new Date(Date.now() + 1000 * 60),
+        httpOnly: true,
+    })
+    .json({
         // message: 'User successfully logged in',
         user: { id: user.id, email: user.email },
-        accessToken: accessToken,
-        refreshToken: refreshToken
+        accessToken: accessToken
     });
 });
 

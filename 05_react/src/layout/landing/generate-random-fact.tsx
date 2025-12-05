@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useFetchData from "../../utils/useFetchData";
+import useFetchData from "../../utils/hooks/useFetchData";
 
 type Fact = {
     id: string;

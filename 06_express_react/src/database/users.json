@@ -39,6 +39,11 @@
             "id": 8,
             "email": "asd@mail.com",
             "hashedPassword": "$2b$10$wLdMObA/cbl.fowsSjkV6.uaR4gvqC.TYSa7GJnh/Nr3t16Ed1dgu"
+        },
+        {
+            "id": 9,
+            "email": "a",
+            "hashedPassword": "$2b$10$/twWZ.Z2GEqinPssIRzzfurhCes0kmQjl/mB5Nxi9vuQl5P9yLfBS"
         }
     ]
 }

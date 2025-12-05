@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-
 export default function useCheckKey(key: string) {
     useEffect(() => {
         setInterval(() => {

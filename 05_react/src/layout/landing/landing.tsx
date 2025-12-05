@@ -1,8 +1,15 @@
 import './styles/landing.css'
 import Testimonials from './testimonials';
 import GenerateRandomFact from './generate-random-fact';
+import { useContext } from 'react';
+import { AuthContext } from '../../utils/context/authContext';
+import { Navigate } from 'react-router-dom';
 
 export default function Landing() {
+    const authContext = useContext(AuthContext);
+
+    if (authContext.user === null) return <Navigate to='/login' />
+
     return (
         <main>
             <h1>DISCOVER <span className='dark-text'>DOCUFLOW</span></h1>

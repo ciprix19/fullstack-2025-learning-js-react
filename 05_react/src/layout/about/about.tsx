@@ -1,6 +1,13 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../utils/context/authContext';
 import './styles/about.css'
+import { Navigate } from 'react-router-dom';
 
 export default function About() {
+    const authContext = useContext(AuthContext);
+
+    if (authContext.user === null) return <Navigate to='/login' />
+
     return (
         <main>
             <h1>LEARN MORE ABOUT <span className="dark-text">DOCUFLOW</span></h1>

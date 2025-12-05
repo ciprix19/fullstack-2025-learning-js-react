@@ -4,5 +4,5 @@
     "reviewsURL": "./src/database/reviews.json",
     "usersURL": "./src/database/users.json",
     "secretKey": "secret-key",
-    "expiresIn": "1h"
+    "expiresIn": "15s"
 }

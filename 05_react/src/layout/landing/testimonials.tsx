@@ -1,5 +1,6 @@
-import { useEffect, useState, type ChangeEvent } from 'react';
-import useFetchData from '../../utils/useFetchData';
+import { useContext, useEffect, useState, type ChangeEvent } from 'react';
+import useFetchData from '../../utils/hooks/useFetchData';
+import { AuthContext } from '../../utils/context/authContext';
 
 type Review = {
     id: number;
@@ -14,6 +15,7 @@ type Reviews = Review[];
 
 let howManyReviews = 3;
 export default function Testimonials() {
+    const authContext = useContext(AuthContext);
     const fetched = useFetchData('http://localhost:3000/testimonials');
     const [reviews, setReviews] = useState<Reviews>([]);
     const [currentReviewIndex, setCurrentReviewIndex] = useState<number>(0);

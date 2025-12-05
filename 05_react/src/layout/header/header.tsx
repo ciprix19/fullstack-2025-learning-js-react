@@ -1,8 +1,9 @@
 import './styles/header.css';
-import type { ThemeState } from '../../interfaces/theme-state';
-import type { User } from '../../interfaces/user';
-import { useState } from 'react';
+import type { ThemeState } from '../../utils/interfaces/theme-state';
+import type { User } from '../../utils/interfaces/user';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../utils/context/authContext';
 
 interface HeaderProps {
     theme: ThemeState;
@@ -11,7 +12,7 @@ interface HeaderProps {
 
 export default function Header({ theme, setTheme }: HeaderProps ) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [userLogged, setUserLogged] = useState<User>();
+    const authContext = useContext(AuthContext);
 
     function changeTheme() {
         localStorage.setItem('theme', theme.status === 'red' ? 'blue': 'red');
@@ -20,6 +21,10 @@ export default function Header({ theme, setTheme }: HeaderProps ) {
 
     function toggleMenu() {
         setIsMenuOpen(!isMenuOpen);
+    }
+
+    function handleLogout() {
+        authContext.setUser(null);
     }
 
     return (
@@ -33,21 +38,20 @@ export default function Header({ theme, setTheme }: HeaderProps ) {
                     <li onClick={() => setIsMenuOpen(false)}>
                         <Link to='/about'>About</Link>
                     </li>
-                    <li onClick={() => setIsMenuOpen(false)}>
-                        <Link to='/login'>Login</Link>
-                    </li>
                     <li>
                         <label onClick={changeTheme}>Change Theme</label>
                     </li>
                     <li>
-                        <label>{ userLogged !== undefined ? `Logged in as: ${userLogged.email}` : 'Not logged in' }</label>
+                        <label>{ authContext.user !== null ? `Logged in as: ${authContext.user.email}` : 'Not logged in' }</label>
+                    </li>
+                    <li onClick={authContext.user !== null ? handleLogout : () => {}}>
+                        {authContext.user !== null ?
+                            'Logout' :
+                            <Link to='/login'>Login</Link>
+                        }
                     </li>
                 </ul>
             </nav>
-            {/* <div className='change-theme'>
-                <button className='change-theme-button' onClick={changeTheme}>Change Theme</button>
-            </div>
-            <label>{ userLogged !== null ? `Logged in as: ${userLogged.email}` : 'Not logged in' }</label> */}
             <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
                 <span className='bar'></span>
                 <span className='bar'></span>

@@ -10,7 +10,8 @@ const cookieParser = require('cookie-parser');
 const port = config.port;
 
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: 'http://localhost:5173',
+    credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -25,7 +26,6 @@ app.use(cookieParser());
 
 app.get('/health', (req, res) => {
     if (!req.cookies) return res.status(404).json({ error: 'No cookies found' });
-    // console.log(req.cookies);
     for (const [key, value] of Object.entries(req.cookies)) {
         if (key === 'myCookie' && value === 'amCookie') res.status(200).json({ message: 'Cookie ok!' });
     }
@@ -39,6 +39,8 @@ function logger(req, res, next) {
     console.log(req.originalUrl);
     next();
 }
+
+// app.set('trust-proxy', 1);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

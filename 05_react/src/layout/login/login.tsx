@@ -1,17 +1,20 @@
-import { useState, type MouseEvent } from 'react';
 import './styles/login.css';
+import { useState, type MouseEvent, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../utils/context/authContext';
 
 export default function Login() {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
     const [infoPanel, setInfoPanel] = useState<string>('');
     const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
 
     async function handleLogInButton(e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         const response = await fetch("http://localhost:3000/users/login", {
             method: "POST",
+            credentials: "include", // cookies work with this!!
             headers: {
                 "Content-Type": "application/json"
             },
@@ -24,6 +27,7 @@ export default function Login() {
         console.log(data);
         if (response.status !== 200) setInfoPanel(data.message);
         else {
+            authContext.setUser(data.user);
             navigate('/');
         }
     }
