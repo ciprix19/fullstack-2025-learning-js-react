@@ -38,17 +38,6 @@ userRouter.get('/', authenticateToken, (req, res) => {
     res.json(usersData);
 });
 
-userRouter.get('/:userId', (req, res) => {
-    const id = Number(req.params.userId);
-    const user = usersData.users.find(u => u.id === id);
-
-    if (!user) {
-        return res.status(404).json({ message: "User not found" });
-    }
-
-    res.json(user);
-});
-
 userRouter.post('/signup', async (req, res) => {
     const { email, password, confirmPassword } = req.body;
 
@@ -97,9 +86,16 @@ function generateAccessToken(user) {
 //     });
 // })
 
-userRouter.post('/token', (req, res) => {
+userRouter.get('/token', (req, res) => {
+    if (req.cookies.token === undefined) return;
     const token = req.cookies.token.split(' ')[1];
-    console.log(token);
+    if (!token) return res.status(401).json({ message: 'Missing refreshToken' });
+    if (!tokensData.refreshTokens.includes(token)) return res.status(403).json({ message: 'Invalid refresh token' });
+    jwt.verify(token, secretKey, (err, user) => {
+        if (err) return res.status(403).json({ messag: 'Refresh token expired' });
+        const accessToken = generateAccessToken({ id: user.id, email: user.email });
+        res.json({ user: user, accessToken: accessToken });
+    })
 })
 
 // todo use jwt
@@ -171,6 +167,17 @@ userRouter.delete('/delete', authenticateToken, (req, res) => {
     usersData.users = usersData.users.filter(u => u.id !== req.user.id);
     writeFileSync(config.usersURL, JSON.stringify(usersData, null, 4));
     res.status(204).json({ message: 'Delete successful' });
+});
+
+userRouter.get('/:userId', (req, res) => {
+    const id = Number(req.params.userId);
+    const user = usersData.users.find(u => u.id === id);
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
 });
 
 module.exports = userRouter;

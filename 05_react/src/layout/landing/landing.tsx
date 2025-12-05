@@ -6,9 +6,8 @@ import { AuthContext } from '../../utils/context/authContext';
 import { Navigate } from 'react-router-dom';
 
 export default function Landing() {
-    const authContext = useContext(AuthContext);
 
-    if (authContext.user === null) return <Navigate to='/login' />
+    // if (localStorage.getItem('active') === 'false') return <Navigate to='/login' />
 
     return (
         <main>

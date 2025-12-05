@@ -4,9 +4,8 @@ import './styles/about.css'
 import { Navigate } from 'react-router-dom';
 
 export default function About() {
-    const authContext = useContext(AuthContext);
 
-    if (authContext.user === null) return <Navigate to='/login' />
+    // if (localStorage.getItem('active') === 'false') return <Navigate to='/login' />
 
     return (
         <main>
