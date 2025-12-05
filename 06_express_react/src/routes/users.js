@@ -158,9 +158,10 @@ userRouter.patch('/change-password', async (req, res) => {
 });
 
 userRouter.delete('/logout', (req, res) => {
-    tokensData.refreshTokens = tokensData.refreshTokens.filter(token => token !== req.body.token);
+    const token = req.cookies.token.split(' ')[1];
+    tokensData.refreshTokens = tokensData.refreshTokens.filter(t => t !== token);
     writeFileSync(config.refreshTokensURL, JSON.stringify(tokensData, null, 4));
-    res.status(204).json({ message: 'Logout successful' });
+    res.status(204).clearCookie('token').json({ message: 'Logout successful' });
 });
 
 userRouter.delete('/delete', authenticateToken, (req, res) => {

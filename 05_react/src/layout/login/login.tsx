@@ -12,11 +12,11 @@ export default function Login() {
 
     async function handleLogInButton(e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-        const response = await fetch("http://localhost:3000/users/login", {
-            method: "POST",
-            credentials: "include", // cookies work with this!!
+        const response = await fetch('http://localhost:3000/users/login', {
+            method: 'POST',
+            credentials: 'include', // cookies work with this!!
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: email,
@@ -48,7 +48,7 @@ export default function Login() {
                     <button onClick={e => handleLogInButton(e)}>Sign In</button>
                 </form>
                 <label>{infoPanel}</label>
-                <label>Don't have an account yet? <Link to='/signup'>Sign up here</Link></label>
+                <label>Don't have an account yet? <Link to='/signup'>Sign up</Link></label>
                 <br></br>
                 <label><Link to='/change-password'>Forgot your password?</Link></label>
             </section>

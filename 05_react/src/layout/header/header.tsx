@@ -23,8 +23,16 @@ export default function Header({ theme, setTheme }: HeaderProps ) {
         setIsMenuOpen(!isMenuOpen);
     }
 
-    function handleLogout() {
-        authContext.setUser(null);
+    async function handleLogout() {
+        const response = await fetch('http://localhost:3000/users/logout', {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+        // const data = await response.json();
+        if (response.status === 204) authContext.setUser(null);
     }
 
     return (

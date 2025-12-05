@@ -47,7 +47,7 @@ export default function SignUp() {
                 </form>
                 <label>{infoPanel}</label>
                 <br></br>
-                <label>Already have an account? <Link to='/login'>Log in here</Link></label>
+                <label>Already have an account? <Link to='/login'>Log in</Link></label>
             </section>
         </main>
     );
