@@ -8,7 +8,7 @@ export function AuthProvider({ children }: { children: React.ReactNode} ) {
     const [user, setUser] = useState<User | null>(null);
     const fetched = useFetchData('http://localhost:3000/users/token', { credentials: 'include' })
 
-    // i need to check if the request sent to /token contains the cookie with the refresh token
+    // i need to check if the request sent at /token contains the cookie with the refresh token
     useEffect(() => {
         if (fetched?.user) {
             setUser(fetched.user);
