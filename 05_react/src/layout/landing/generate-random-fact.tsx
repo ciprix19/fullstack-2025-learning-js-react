@@ -11,7 +11,7 @@ type Fact = {
 }
 
 export default function GenerateRandomFact() {
-    const fetched = useFetchData('https://uselessfacts.jsph.pl/api/v2/facts/random');
+    const fetched = useFetchData('https://uselessfacts.jsph.pl/api/v2/facts/random', {});
     const [randomFact, setRandomFact] = useState<Fact | null>(null);
 
     // todo - add items in div

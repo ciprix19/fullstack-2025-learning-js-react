@@ -12,7 +12,6 @@ import type { ThemeState } from './utils/interfaces/theme-state'
 import useCheckKey from './utils/hooks/useCheckKey'
 import useLoadingState from './utils/hooks/useLoadingState'
 import { AuthProvider } from './utils/provider/authProvider'
-import { AuthContext } from './utils/context/authContext'
 
 const savedTheme = localStorage.getItem('theme');
 
