@@ -1,0 +1,49 @@
+{
+    "users": [
+        {
+            "id": 0,
+            "email": "a@mail.com",
+            "hashedPassword": "$2b$10$xsDkDkg1bGCiubgWJX7Ia.wQtw3yejL5arYdJwE/yubHXoZU0sLRy"
+        },
+        {
+            "id": 3,
+            "email": "d@mail.com",
+            "hashedPassword": "$2b$10$h2dGwqv7/di1gj9PFwpSHe3T5/cccez/nd/tIPgw0QG/op0SZ/IHK"
+        },
+        {
+            "id": 2,
+            "email": "e@mail.com",
+            "hashedPassword": "$2b$10$/wtQlkyYHH4MLloQm67NEOpAYISdZwDh/ykw5SWC9rFyoTwV4GBnK"
+        },
+        {
+            "id": 4,
+            "email": "f@mail.com",
+            "hashedPassword": "$2b$10$W0YF2YDb0DOjhInbT8hooeM6HVOe8jKFNIphGUL4zMoKOS1DhM6Ky"
+        },
+        {
+            "id": 5,
+            "email": "g@mail.com",
+            "hashedPassword": "$2b$10$rXg.O78VjReYLyT3vmcWPeuEcAv48yLlVfJM/SBrvshvj8Fhd2UsC"
+        },
+        {
+            "id": 6,
+            "email": "x@mail.com",
+            "hashedPassword": "$2b$10$Y5F7/i3ur5HIGM4w08VzDuatwsX3MstT2JwXcVcvbwqRxLsP9.RQ."
+        },
+        {
+            "id": 7,
+            "email": "cipri@mail.com",
+            "hashedPassword": "$2b$10$cXtFHctltYbelUoaT5bFm.i2FPH8GRr0cGy4DVY.5iHS9QfVxPYMm"
+        },
+        {
+            "id": 8,
+            "email": "asd@mail.com",
+            "hashedPassword": "$2b$10$wLdMObA/cbl.fowsSjkV6.uaR4gvqC.TYSa7GJnh/Nr3t16Ed1dgu"
+        },
+        {
+            "id": 9,
+            "email": "a",
+            "hashedPassword": "$2b$10$p77SBesHryQ6GqFmp.KNs.DYrxb7.FX1rsvVpbB8RhgosPOWK1g.u"
+        }
+    ]
+}

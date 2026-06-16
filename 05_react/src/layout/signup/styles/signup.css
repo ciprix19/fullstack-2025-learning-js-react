@@ -1,0 +1,19 @@
+.signup {
+    display: grid;
+    place-items: center;
+}
+
+.signup form > div {
+    margin: 1rem;
+    display: grid;
+}
+
+.signup button {
+    width: 100%;
+    margin-block: 1rem;
+}
+
+.signup > .card > label {
+    display: block;
+    text-align: center;
+}

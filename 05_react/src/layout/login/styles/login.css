@@ -1,0 +1,19 @@
+.login {
+    display: grid;
+    place-items: center;
+}
+
+.login form > div {
+    margin: 1rem;
+    display: grid;
+}
+
+.login button {
+    width: 100%;
+    margin-block: 1rem;
+}
+
+.login > .card > label {
+    display: block;
+    text-align: center;
+}
